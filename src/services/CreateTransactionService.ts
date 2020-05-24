@@ -36,6 +36,7 @@ class CreateTransactionService {
     let categoryFound = await categoryRepository.findOne({ title: category });
     if (!categoryFound) {
       categoryFound = await categoryRepository.create({ title: category });
+      await categoryRepository.save(categoryFound);
     }
 
     const newTransaction = await transactionRepository.create({
@@ -44,6 +45,8 @@ class CreateTransactionService {
       type,
       category_id: categoryFound?.id,
     });
+
+    await transactionRepository.save(newTransaction);
 
     return newTransaction;
   }
