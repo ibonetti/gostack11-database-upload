@@ -17,11 +17,11 @@ class TransactionsRepository extends Repository<Transaction> {
         const bal = calcBalance;
         switch (transaction.type) {
           case 'income':
-            bal.income += transaction.value;
+            bal.income += Number(transaction.value);
             break;
 
           case 'outcome':
-            bal.outcome += transaction.value;
+            bal.outcome += Number(transaction.value);
             break;
 
           default:
